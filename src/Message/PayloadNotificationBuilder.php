@@ -103,6 +103,13 @@ class PayloadNotificationBuilder
     protected $titleLocationArgs;
 
     /**
+     * @internal
+     * 
+     * @var null|string
+     */
+    protected $image;
+
+    /**
      * Title must be present on android notification and ios (watch) notification.
      *
      * @param string $title
@@ -306,6 +313,20 @@ class PayloadNotificationBuilder
     }
 
     /**
+     * Set notification image
+     * 
+     * @param string $image
+     * 
+     * @return PayloadNotificationBuilder
+     */
+    public function setImage(string $image): PayloadNotificationBuilder
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
      * Get title.
      *
      * @return null|string
@@ -433,6 +454,16 @@ class PayloadNotificationBuilder
     public function getTitleLocationArgs()
     {
         return $this->titleLocationArgs;
+    }
+
+    /**
+     * Get image
+     * 
+     * @return null|string
+     */
+    public function getImage(): ?string 
+    {
+        return $this->string;
     }
 
     /**
