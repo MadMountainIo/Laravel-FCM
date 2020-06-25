@@ -463,7 +463,7 @@ class PayloadNotificationBuilder
      */
     public function getImage(): ?string 
     {
-        return $this->string;
+        return $this->image;
     }
 
     /**
