@@ -70,6 +70,13 @@ class OptionsBuilder
     protected $dryRun = false;
 
     /**
+     * @internal
+     * 
+     * @var string
+     */
+    protected $analyticsLabel = null;
+
+    /**
      * This parameter identifies a group of messages
      * A maximum of 4 different collapse keys is allowed at any given time.
      *
@@ -203,6 +210,23 @@ class OptionsBuilder
     }
 
     /**
+     * This parameter allows set analytics label in order to better reporting notifications
+     *
+     * @param string $label
+     *
+     * @return \LaravelFCM\Message\OptionsBuilder
+     */
+    public function setAnalyticsLabel(string $label)
+    {
+        $label = str_slug($label);
+        $label = substr($label, 0, 50);
+
+        $this->analyticsLabel = $label;
+
+        return $this;
+    }
+
+    /**
      * Get the collapseKey.
      *
      * @return null|string
@@ -280,6 +304,11 @@ class OptionsBuilder
     public function isDryRun()
     {
         return $this->dryRun;
+    }
+
+    public function getAnalyticsLabel(): ?string
+    {
+        return $this->analyticsLabel;
     }
 
     /**

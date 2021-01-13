@@ -66,6 +66,13 @@ class Options implements Arrayable
     protected $isDryRun = false;
 
     /**
+     * @internal
+     * 
+     * @var null|string
+     */
+    protected $analyticsLabel = null;
+
+    /**
      * Options constructor.
      *
      * @param OptionsBuilder $builder
@@ -80,6 +87,7 @@ class Options implements Arrayable
         $this->timeToLive = $builder->getTimeToLive();
         $this->restrictedPackageName = $builder->getRestrictedPackageName();
         $this->isDryRun = $builder->isDryRun();
+        $this->analyticsLabel = $builder->getAnalyticsLabel();
     }
 
     /**
@@ -104,6 +112,14 @@ class Options implements Arrayable
             'restricted_package_name' => $this->restrictedPackageName,
             'dry_run' => $dryRun,
         ];
+
+        if ($this->analyticsLabel) {
+            $options = array_merge($options, [
+                'fcm_options' => [
+                    'analytics_label' => $this->analyticsLabel
+                ]
+            ]);
+        }
 
         return array_filter($options);
     }
